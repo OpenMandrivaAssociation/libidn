@@ -1,5 +1,6 @@
 %define	major 11
 %define libname	%mklibname idn %{major}
+%define develname %mklibname idn -d
 
 Summary:	Internationalized string processing library
 Name:		libidn
@@ -13,7 +14,7 @@ Source1:	http://josefsson.org/libidn/releases/%{name}-%{version}.tar.gz.sig
 BuildRequires:	libtool
 BuildRequires:	autoconf2.5
 BuildRequires:	texinfo
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
+BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 GNU Libidn is an implementation of the Stringprep, Punycode and
@@ -21,10 +22,10 @@ IDNA specifications defined by the IETF Internationalized Domain
 Names (IDN) working group, used for internationalized domain
 names.
 
-%package -n	%{libname}
+%package -n %{libname}
 Summary:	Internationalized string processing library
-Group:          System/Libraries
-Requires(post): info-install
+Group:		System/Libraries
+Requires(post):	info-install
 Requires(preun): info-install
 
 %description -n	%{libname}
@@ -33,24 +34,25 @@ IDNA specifications defined by the IETF Internationalized Domain
 Names (IDN) working group, used for internationalized domain
 names.
 
-%package -n	%{libname}-devel
+%package -n %{develname}
 Summary:	Development files for the %{libname} library
 Group:		Development/C
-Provides:	%{name}-devel = %{version}
-Provides:	idn-devel = %{version}
-Requires:	%{libname} = %{version}
+Provides:	%{name}-devel = %{version}-%{release}
+Provides:	idn-devel = %{version}-%{release}
+Requires:	%{libname} = %{version}-%{release}
 Requires:	pkgconfig
+Obsoletes:	%mklibname idn 11 -d
 
-%description -n	%{libname}-devel
-Development files for the %{libname} library
+%description -n	%{develname}
+Development files for the %{libname} library.
 
-%package -n	idn
+%package -n idn
 Summary:	Commandline interface to the %{libname} library
-Group:          System/Servers
+Group:		System/Servers
 
-%description -n	idn
+%description -n idn
 This package provides the commandline interface to the
-%{libname} library
+%{libname} library.
 
 %prep
 
@@ -62,10 +64,10 @@ This package provides the commandline interface to the
 #libtoolize --copy --force; aclocal; autoconf
 
 # wierd stuff...
-%define __libtoolize /bin/true
+#%define __libtoolize /bin/true
 
-%configure2_5x
-
+%configure2_5x \
+	--disable-rpath
 
 %make
 
@@ -95,9 +97,13 @@ find doc -type f | sed 's/^/%doc /' | \
     grep -v "gdoc" | \
     grep -v "mdate-sh" > %{libname}-devel.filelist
 
-find examples -type f -name ".c" | sed 's/^/%doc /' >> %{libname}-devel.filelist
+find examples -type f -name ".c" | sed 's/^/%doc /' >> %{develname}.filelist
 
-%find_lang libidn
+%find_lang %{name}
+
+#(tpg) really not needed... also got lzma'd :)
+
+rm -rf %{buildroot}%{_infodir}/*.png*
 
 # this fixes a file clash in a mixed arch env
 mv %{buildroot}%{_infodir}/%{name}.info %{buildroot}%{_infodir}/%{libname}.info
@@ -105,7 +111,7 @@ mv %{buildroot}%{_infodir}/%{name}.info %{buildroot}%{_infodir}/%{libname}.info
 %post -n %{libname}
 %_install_info %{libname}.info
 /sbin/ldconfig
-
+ 
 %postun -n %{libname}
 %_remove_install_info %{libname}.info
 /sbin/ldconfig
@@ -113,7 +119,7 @@ mv %{buildroot}%{_infodir}/%{name}.info %{buildroot}%{_infodir}/%{libname}.info
 %clean
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
 
-%files -n idn -f libidn.lang
+%files -n idn -f %{name}.lang
 %defattr(0644,root,root,755)
 %doc ChangeLog FAQ README
 %attr(0755,root,root) %{_bindir}/idn
@@ -127,7 +133,7 @@ mv %{buildroot}%{_infodir}/%{name}.info %{buildroot}%{_infodir}/%{libname}.info
 %attr(0755,root,root) %{_libdir}/libidn.so.%{major}
 %{_infodir}/%{libname}.info*
 
-%files -n %{libname}-devel -f %{libname}-devel.filelist
+%files -n %{develname} -f %{develname}.filelist
 %defattr(0644,root,root,755)
 %doc ChangeLog doc/libidn.html TODO libc/example.c examples/README examples/Makefile.*
 %{_libdir}/libidn.so
@@ -136,5 +142,3 @@ mv %{buildroot}%{_infodir}/%{name}.info %{buildroot}%{_infodir}/%{libname}.info
 %{_includedir}/*.h
 %{_libdir}/pkgconfig/*.pc
 %{_mandir}/man3/*
-
-
