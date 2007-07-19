@@ -3,8 +3,8 @@
 
 Summary:	Internationalized string processing library
 Name:		libidn
-Version:	0.6.9
-Release:	%mkrel 3
+Version:	0.6.14
+Release:	%mkrel 1
 License:	LGPL
 Group:		System/Libraries
 URL:		http://josefsson.org/libidn/releases/
@@ -65,6 +65,7 @@ This package provides the commandline interface to the
 %define __libtoolize /bin/true
 
 %configure2_5x
+
 
 %make
 
