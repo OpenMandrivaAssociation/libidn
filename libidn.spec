@@ -4,9 +4,9 @@
 
 Summary:	Internationalized string processing library
 Name:		libidn
-Version:	1.0
-Release:	%mkrel 2
-License:	LGPL
+Version:	1.2
+Release:	%mkrel 1
+License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://josefsson.org/libidn/releases/
 Source0:	http://josefsson.org/libidn/releases/%{name}-%{version}.tar.gz
