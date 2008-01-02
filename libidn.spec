@@ -14,6 +14,7 @@ Source1:	http://josefsson.org/libidn/releases/%{name}-%{version}.tar.gz.sig
 BuildRequires:	libtool
 BuildRequires:	autoconf2.5
 BuildRequires:	texinfo
+BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 GNU Libidn is an implementation of the Stringprep, Punycode and
