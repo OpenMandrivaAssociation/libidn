@@ -4,15 +4,13 @@
 
 Summary:	Internationalized string processing library
 Name:		libidn
-Version:	1.3
+Version:	1.4
 Release:	%mkrel 1
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://josefsson.org/libidn/releases/
 Source0:	http://josefsson.org/libidn/releases/%{name}-%{version}.tar.gz
-Source1:	http://josefsson.org/libidn/releases/%{name}-%{version}.tar.gz.sig
-BuildRequires:	libtool
-BuildRequires:	autoconf2.5
+Source1:	%{SOURCE0}.sig
 BuildRequires:	texinfo
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
@@ -55,17 +53,10 @@ This package provides the commandline interface to the
 %{libname} library.
 
 %prep
-
 %setup -q
 
 
 %build
-#export WANT_AUTOCONF_2_5=1
-#libtoolize --copy --force; aclocal; autoconf
-
-# wierd stuff...
-#%define __libtoolize /bin/true
-
 %configure2_5x \
 	--disable-rpath
 
@@ -86,7 +77,7 @@ rm -f %{buildroot}%{_libdir}/Libidn.dll
 rm -rf %{buildroot}%{_datadir}/locale/en@*quot
 
 # make a nice list for docs
-find doc -type f | sed 's/^/%doc /' | \
+find doc -type f | sed 's/^/%{doc} /' | \
     grep -v "Makefile*" | \
     grep -v "\.tex*" | \
     grep -v "\.info" | \
@@ -97,7 +88,7 @@ find doc -type f | sed 's/^/%doc /' | \
     grep -v "gdoc" | \
     grep -v "mdate-sh" > %{libname}-devel.filelist
 
-find examples -type f -name ".c" | sed 's/^/%doc /' >> %{develname}.filelist
+find examples -type f -name ".c" | sed 's/^/%{doc} /' >> %{develname}.filelist
 
 %find_lang %{name}
 
@@ -121,16 +112,14 @@ mv %{buildroot}%{_infodir}/%{name}.info %{buildroot}%{_infodir}/%{libname}.info
 
 %files -n idn -f %{name}.lang
 %defattr(0644,root,root,755)
-%doc ChangeLog FAQ README
+%doc ChangeLog FAQ README THANKS contrib
 %attr(0755,root,root) %{_bindir}/idn
 %{_mandir}/man1/idn.1*
 %{_datadir}/emacs/site-lisp/*.el
 
 %files -n %{libname}
 %defattr(0644,root,root,755)
-%doc FAQ README THANKS contrib
-%attr(0755,root,root) %{_libdir}/libidn.so.%{major}.*
-%attr(0755,root,root) %{_libdir}/libidn.so.%{major}
+%attr(0755,root,root) %{_libdir}/libidn.so.%{major}*
 %{_infodir}/%{libname}.info*
 
 %files -n %{develname} -f %{develname}.filelist
