@@ -4,7 +4,7 @@
 
 Summary:	Internationalized string processing library
 Name:		libidn
-Version:	1.7
+Version:	1.8
 Release:	%mkrel 1
 License:	LGPLv2+
 Group:		System/Libraries
@@ -12,6 +12,9 @@ URL:		http://josefsson.org/libidn/releases/
 Source0:	http://josefsson.org/libidn/releases/%{name}-%{version}.tar.gz
 Source1:	%{SOURCE0}.sig
 BuildRequires:	texinfo
+BuildRequires:	valgrind
+BuildRequires:	java-rpmbuild
+BuildRequires:	mono
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
@@ -52,13 +55,34 @@ Group:		System/Servers
 This package provides the commandline interface to the
 %{libname} library.
 
+%package -n %{libname}-java
+Summary:	Java support for the %{name}
+Group:		Development/Java
+Provides:	%{name}-java = %{version}-%{release}
+Requires:	%{libname} = %{version}-%{release}
+
+%description -n %{libname}-java
+Java support for the %{name}.
+
+%package -n %{libname}-mono
+Summary:	Mono support for the %{name}
+Group:		Development/Other
+Provides:	%{name}-mono = %{version}-%{release}
+Requires:	%{libname} = %{version}-%{release}
+
+%description -n %{libname}-mono
+Mono support for the %{name}.
+
 %prep
 %setup -q
 
 
 %build
 %configure2_5x \
-	--disable-rpath
+	--disable-rpath \
+	--enable-java \
+	--enable-csharp=mono \
+	--enable-valgrind-tests
 
 %make
 
@@ -69,9 +93,6 @@ make check
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
 
 %makeinstall_std
-
-# house cleansing
-rm -f %{buildroot}%{_libdir}/Libidn.dll
 
 # fix "invalid-lc-messages-dir":
 rm -rf %{buildroot}%{_datadir}/locale/en@*quot
@@ -111,23 +132,31 @@ mv %{buildroot}%{_infodir}/%{name}.info %{buildroot}%{_infodir}/%{libname}.info
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
 
 %files -n idn -f %{name}.lang
-%defattr(0644,root,root,755)
+%defattr(-,root,root)
 %doc ChangeLog FAQ README THANKS contrib
-%attr(0755,root,root) %{_bindir}/idn
+%{_bindir}/idn
 %{_mandir}/man1/idn.1*
 %{_datadir}/emacs/site-lisp/*.el
 
 %files -n %{libname}
-%defattr(0644,root,root,755)
-%attr(0755,root,root) %{_libdir}/libidn.so.%{major}*
+%defattr(-,root,root)
+%{_libdir}/libidn.so.%{major}*
 %{_infodir}/%{libname}.info*
 
 %files -n %{develname} -f %{develname}.filelist
-%defattr(0644,root,root,755)
-%doc ChangeLog doc/libidn.html TODO libc/example.c examples/README examples/Makefile.*
+%defattr(-,root,root)
+%doc doc/libidn.html TODO libc/example.c examples/README examples/Makefile.*
 %{_libdir}/libidn.so
 %{_libdir}/libidn.a
 %{_libdir}/libidn.la
 %{_includedir}/*.h
 %{_libdir}/pkgconfig/*.pc
 %{_mandir}/man3/*
+
+%files -n %{libname}-java
+%defattr(-,root,root)
+%{_datadir}/java/*.jar
+
+%files -n %{libname}-mono
+%defattr(-,root,root)
+%{_libdir}/*.dll
