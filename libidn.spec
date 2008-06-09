@@ -122,11 +122,15 @@ mv %{buildroot}%{_infodir}/%{name}.info %{buildroot}%{_infodir}/%{libname}.info
 
 %post -n %{libname}
 %_install_info %{libname}.info
+%if %mdkversion < 200900
 /sbin/ldconfig
+%endif
  
 %postun -n %{libname}
 %_remove_install_info %{libname}.info
+%if %mdkversion < 200900
 /sbin/ldconfig
+%endif
 
 %clean
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
