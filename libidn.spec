@@ -4,7 +4,7 @@
 
 Summary:	Internationalized string processing library
 Name:		libidn
-Version:	1.8
+Version:	1.9
 Release:	%mkrel 1
 License:	LGPLv2+
 Group:		System/Libraries
@@ -15,7 +15,7 @@ BuildRequires:	texinfo
 BuildRequires:	valgrind
 BuildRequires:	java-rpmbuild
 BuildRequires:	mono
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 GNU Libidn is an implementation of the Stringprep, Punycode and
@@ -90,7 +90,7 @@ Mono support for the %{name}.
 make check
 
 %install
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %makeinstall_std
 
@@ -133,7 +133,7 @@ mv %{buildroot}%{_infodir}/%{name}.info %{buildroot}%{_infodir}/%{libname}.info
 %endif
 
 %clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %files -n idn -f %{name}.lang
 %defattr(-,root,root)
