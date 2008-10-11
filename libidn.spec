@@ -8,8 +8,8 @@ Version:	1.10
 Release:	%mkrel 1
 License:	LGPLv2+
 Group:		System/Libraries
-URL:		http://josefsson.org/libidn/releases/
-Source0:	http://josefsson.org/libidn/releases/%{name}-%{version}.tar.gz
+URL:		http://www.gnu.org/software/libidn/
+Source0:	http://ftp.gnu.org/gnu/libidn/%{name}-%{version}.tar.gz
 Source1:	%{SOURCE0}.sig
 BuildRequires:	texinfo
 BuildRequires:	valgrind
