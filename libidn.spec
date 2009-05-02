@@ -4,8 +4,8 @@
 
 Summary:	Internationalized string processing library
 Name:		libidn
-Version:	1.13
-Release:	%mkrel 2
+Version:	1.14
+Release:	%mkrel 1
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://www.gnu.org/software/libidn/
