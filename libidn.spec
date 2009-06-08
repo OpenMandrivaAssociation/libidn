@@ -4,7 +4,7 @@
 
 Summary:	Internationalized string processing library
 Name:		libidn
-Version:	1.14
+Version:	1.15
 Release:	%mkrel 1
 License:	LGPLv2+
 Group:		System/Libraries
