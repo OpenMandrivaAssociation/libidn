@@ -5,16 +5,21 @@
 Summary:	Internationalized string processing library
 Name:		libidn
 Version:	1.15
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://www.gnu.org/software/libidn/
 Source0:	http://ftp.gnu.org/gnu/libidn/%{name}-%{version}.tar.gz
 Source1:	%{SOURCE0}.sig
 BuildRequires:	texinfo
+%ifnarch %mips %arm
 BuildRequires:	valgrind
 BuildRequires:	java-rpmbuild
+%endif
+# disable on arm for now. test it again on real hardware. qemu doesn't like it
+%ifnarch %mips %arm
 BuildRequires:	mono
+%endif
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -55,6 +60,7 @@ Group:		System/Servers
 This package provides the commandline interface to the
 %{libname} library.
 
+%ifnarch %mips %arm
 %package -n %{libname}-java
 Summary:	Java support for the %{name}
 Group:		Development/Java
@@ -72,6 +78,7 @@ Requires:	%{libname} = %{version}-%{release}
 
 %description -n %{libname}-mono
 Mono support for the %{name}.
+%endif
 
 %prep
 %setup -q
@@ -79,10 +86,14 @@ Mono support for the %{name}.
 
 %build
 %configure2_5x \
-	--disable-rpath \
+%ifnarch %mips %arm
 	--enable-java \
+	--enable-valgrind-tests \
+%endif
+%ifnarch %mips %arm
 	--enable-csharp=mono \
-	--enable-valgrind-tests
+%endif
+	--disable-rpath
 
 %make
 
@@ -157,10 +168,14 @@ rm -rf %{buildroot}
 %{_libdir}/pkgconfig/*.pc
 %{_mandir}/man3/*
 
+%ifnarch %mips %arm
 %files -n %{libname}-java
 %defattr(-,root,root)
 %{_datadir}/java/*.jar
+%endif
 
+%ifnarch %mips %arm
 %files -n %{libname}-mono
 %defattr(-,root,root)
 %{_libdir}/*.dll
+%endif
