@@ -83,6 +83,11 @@ Mono support for the %{name}.
 %prep
 %setup -q
 
+# Name directory sections consistently in the info file, rhbz #209491
+sed -i '/^INFO-DIR-SECTION/{s/GNU Libraries/Libraries/;s/GNU utilities/Utilities/;}' doc/libidn.info
+
+iconv -f ISO-8859-1 -t UTF-8 doc/libidn.info > iconv.tmp
+mv iconv.tmp doc/libidn.info
 
 %build
 %configure2_5x \
