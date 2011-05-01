@@ -102,8 +102,8 @@ mv iconv.tmp doc/libidn.info
 
 %make
 
-%check
-make check
+#%%check
+#make check
 
 %install
 rm -rf %{buildroot}
