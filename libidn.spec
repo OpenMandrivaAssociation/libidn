@@ -10,7 +10,7 @@ License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://www.gnu.org/software/libidn/
 Source0:	http://ftp.gnu.org/gnu/libidn/%{name}-%{version}.tar.gz
-Source1:	%{SOURCE0}.sig
+Source1:	http://ftp.gnu.org/gnu/libidn/%{name}-%{version}.tar.gz.sig
 BuildRequires:	texinfo
 %ifnarch %mips %arm
 BuildRequires:	valgrind
