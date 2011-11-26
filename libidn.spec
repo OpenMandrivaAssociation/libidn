@@ -4,7 +4,7 @@
 
 Summary:	Internationalized string processing library
 Name:		libidn
-Version:	1.22
+Version:	1.23
 Release:	%mkrel 1
 License:	LGPLv2+
 Group:		System/Libraries
@@ -136,17 +136,14 @@ rm -rf %{buildroot}%{_infodir}/*.png*
 # this fixes a file clash in a mixed arch env
 mv %{buildroot}%{_infodir}/%{name}.info %{buildroot}%{_infodir}/%{libname}.info
 
+# cleanup
+rm -f %{buildroot}%{_libdir}/*.*a
+
 %post -n %{libname}
 %_install_info %{libname}.info
-%if %mdkversion < 200900
-/sbin/ldconfig
-%endif
  
 %postun -n %{libname}
 %_remove_install_info %{libname}.info
-%if %mdkversion < 200900
-/sbin/ldconfig
-%endif
 
 %clean
 rm -rf %{buildroot}
@@ -167,8 +164,6 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc doc/libidn.html TODO libc/example.c examples/README examples/Makefile.*
 %{_libdir}/libidn.so
-%{_libdir}/libidn.a
-%{_libdir}/libidn.la
 %{_includedir}/*.h
 %{_libdir}/pkgconfig/*.pc
 %{_mandir}/man3/*
