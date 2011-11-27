@@ -11,7 +11,8 @@ Group:		System/Libraries
 URL:		http://www.gnu.org/software/libidn/
 Source0:	http://ftp.gnu.org/gnu/libidn/%{name}-%{version}.tar.gz
 Source1:	http://ftp.gnu.org/gnu/libidn/%{name}-%{version}.tar.gz.sig
-BuildRequires:	texinfo
+BuildRequires:	autoconf automake libtool m4 intltool pkgconfig perl
+BuildRequires:	texinfo gtk-doc gettext gettext-devel
 %ifnarch %mips %arm
 BuildRequires:	valgrind
 BuildRequires:	java-rpmbuild
@@ -90,6 +91,8 @@ iconv -f ISO-8859-1 -t UTF-8 doc/libidn.info > iconv.tmp
 mv iconv.tmp doc/libidn.info
 
 %build
+autoreconf -fi
+
 %configure2_5x \
 %ifnarch %mips %arm
 	--enable-java \
