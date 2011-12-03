@@ -5,7 +5,7 @@
 Summary:	Internationalized string processing library
 Name:		libidn
 Version:	1.23
-Release:	%mkrel 1
+Release:	2
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://www.gnu.org/software/libidn/
@@ -21,7 +21,6 @@ BuildRequires:	java-rpmbuild
 %ifnarch %mips %arm
 BuildRequires:	mono
 %endif
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 GNU Libidn is an implementation of the Stringprep, Punycode and
@@ -46,7 +45,7 @@ Summary:	Development files for the %{libname} library
 Group:		Development/C
 Provides:	%{name}-devel = %{version}-%{release}
 Provides:	idn-devel = %{version}-%{release}
-Requires:	%{libname} = %{version}-%{release}
+Requires:	%{libname} >= %{version}-%{release}
 Requires:	pkgconfig
 Obsoletes:	%mklibname idn 11 -d
 
@@ -66,7 +65,7 @@ This package provides the commandline interface to the
 Summary:	Java support for the %{name}
 Group:		Development/Java
 Provides:	%{name}-java = %{version}-%{release}
-Requires:	%{libname} = %{version}-%{release}
+Requires:	%{libname} >= %{version}-%{release}
 
 %description -n %{libname}-java
 Java support for the %{name}.
@@ -75,7 +74,7 @@ Java support for the %{name}.
 Summary:	Mono support for the %{name}
 Group:		Development/Other
 Provides:	%{name}-mono = %{version}-%{release}
-Requires:	%{libname} = %{version}-%{release}
+Requires:	%{libname} >= %{version}-%{release}
 
 %description -n %{libname}-mono
 Mono support for the %{name}.
@@ -152,19 +151,16 @@ rm -f %{buildroot}%{_libdir}/*.*a
 rm -rf %{buildroot}
 
 %files -n idn -f %{name}.lang
-%defattr(-,root,root)
 %doc ChangeLog FAQ README THANKS contrib
 %{_bindir}/idn
 %{_mandir}/man1/idn.1*
 %{_datadir}/emacs/site-lisp/*.el
 
 %files -n %{libname}
-%defattr(-,root,root)
 %{_libdir}/libidn.so.%{major}*
 %{_infodir}/%{libname}.info*
 
 %files -n %{develname} -f %{develname}.filelist
-%defattr(-,root,root)
 %doc doc/libidn.html TODO libc/example.c examples/README examples/Makefile.*
 %{_libdir}/libidn.so
 %{_includedir}/*.h
@@ -173,12 +169,10 @@ rm -rf %{buildroot}
 
 %ifnarch %mips %arm
 %files -n %{libname}-java
-%defattr(-,root,root)
 %{_datadir}/java/*.jar
 %endif
 
 %ifnarch %mips %arm
 %files -n %{libname}-mono
-%defattr(-,root,root)
 %{_libdir}/*.dll
 %endif
