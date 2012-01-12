@@ -4,8 +4,8 @@
 
 Summary:	Internationalized string processing library
 Name:		libidn
-Version:	1.23
-Release:	2
+Version:	1.24
+Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://www.gnu.org/software/libidn/
@@ -108,8 +108,6 @@ autoreconf -fi
 #make check
 
 %install
-rm -rf %{buildroot}
-
 %makeinstall_std
 
 # fix "invalid-lc-messages-dir":
@@ -146,9 +144,6 @@ rm -f %{buildroot}%{_libdir}/*.*a
  
 %postun -n %{libname}
 %_remove_install_info %{libname}.info
-
-%clean
-rm -rf %{buildroot}
 
 %files -n idn -f %{name}.lang
 %doc ChangeLog FAQ README THANKS contrib
