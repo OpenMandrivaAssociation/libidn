@@ -11,6 +11,7 @@ Group:		System/Libraries
 URL:		http://www.gnu.org/software/libidn/
 Source0:	http://ftp.gnu.org/gnu/libidn/%{name}-%{version}.tar.gz
 Source1:	http://ftp.gnu.org/gnu/libidn/%{name}-%{version}.tar.gz.sig
+Patch0:		libidn-1.25-automake-1.12_borkfix.diff
 BuildRequires:	autoconf automake libtool m4 intltool pkgconfig perl
 BuildRequires:	texinfo gtk-doc gettext gettext-devel
 %ifnarch %mips %arm
@@ -82,6 +83,7 @@ Mono support for the %{name}.
 
 %prep
 %setup -q
+%patch0 -p0
 
 # Name directory sections consistently in the info file, rhbz #209491
 sed -i '/^INFO-DIR-SECTION/{s/GNU Libraries/Libraries/;s/GNU utilities/Utilities/;}' doc/libidn.info
