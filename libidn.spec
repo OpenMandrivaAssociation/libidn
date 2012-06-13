@@ -5,7 +5,7 @@
 Summary:	Internationalized string processing library
 Name:		libidn
 Version:	1.25
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://www.gnu.org/software/libidn/
@@ -140,12 +140,6 @@ mv %{buildroot}%{_infodir}/%{name}.info %{buildroot}%{_infodir}/%{libname}.info
 
 # cleanup
 rm -f %{buildroot}%{_libdir}/*.*a
-
-%post -n %{libname}
-%_install_info %{libname}.info
- 
-%postun -n %{libname}
-%_remove_install_info %{libname}.info
 
 %files -n idn -f %{name}.lang
 %doc ChangeLog FAQ README THANKS contrib
