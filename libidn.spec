@@ -11,7 +11,7 @@ Group:		System/Libraries
 URL:		http://www.gnu.org/software/libidn/
 Source0:	http://ftp.gnu.org/gnu/libidn/%{name}-%{version}.tar.gz
 Source1:	http://ftp.gnu.org/gnu/libidn/%{name}-%{version}.tar.gz.sig
-Patch0:		libidn-1.25-automake-1.12_borkfix.diff
+Patch0:		libidn-1.25-automake-1.12.patch
 BuildRequires:	autoconf automake libtool m4 intltool pkgconfig perl
 BuildRequires:	texinfo gtk-doc gettext gettext-devel
 %ifnarch %mips %arm
