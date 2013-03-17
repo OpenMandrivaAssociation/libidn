@@ -1,2 +1,5 @@
+removed_sources:
+  libidn-1.25.tar.gz: 92e64fd5a6428bda6ade2c3cde475b76455cd7dd
 sources:
-  "libidn-1.25.tar.gz": 92e64fd5a6428bda6ade2c3cde475b76455cd7dd
+  libidn-1.26.tar.gz: b1cb40646a96dadbfc41d060d23dfb382eec1128
+  libidn-1.26.tar.gz.sig: 8bb32b2482f3419384f0af5d1d437617a383e466
