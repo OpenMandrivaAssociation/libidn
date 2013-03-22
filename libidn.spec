@@ -1,3 +1,5 @@
+%bcond_with crosscompile
+
 %define	major 11
 %define libname	%mklibname idn %{major}
 %define devname %mklibname idn -d
@@ -12,6 +14,9 @@ URL:		http://www.gnu.org/software/libidn/
 Source0:	http://ftp.gnu.org/gnu/libidn/%{name}-%{version}.tar.gz
 Source1:	http://ftp.gnu.org/gnu/libidn/%{name}-%{version}.tar.gz.sig
 Patch0:		libidn-1.25-automake-1.12.patch
+%if %{with crosscompile}
+Patch1000:	002-disable-po-docs-examples.patch
+%endif
 
 BuildRequires:	gtk-doc
 BuildRequires:	intltool
@@ -101,7 +106,7 @@ autoreconf -fi
 	--enable-java \
 	--enable-valgrind-tests \
 %endif
-%ifnarch %mips %arm
+%ifnarch %mips %arm aarch64
 	--enable-csharp=mono \
 %endif
 	--disable-rpath \
@@ -135,15 +140,19 @@ find examples -type f -name ".c" | sed 's/^/%{doc} /' >> %{devname}.filelist
 
 rm -rf %{buildroot}%{_infodir}/*.png*
 
+%if !%{with crosscompile}
 # this fixes a file clash in a mixed arch env
 mv %{buildroot}%{_infodir}/%{name}.info %{buildroot}%{_infodir}/%{libname}.info
+%endif
 
 %files -n idn -f %{name}.lang
 %doc ChangeLog FAQ README THANKS contrib
 %{_bindir}/idn
 %{_datadir}/emacs/site-lisp/*.el
+%if !%{with crosscompile}
 %{_infodir}/%{libname}.info*
 %{_mandir}/man1/idn.1*
+%endif
 
 %files -n %{libname}
 %{_libdir}/libidn.so.%{major}*
@@ -153,14 +162,16 @@ mv %{buildroot}%{_infodir}/%{name}.info %{buildroot}%{_infodir}/%{libname}.info
 %{_libdir}/libidn.so
 %{_includedir}/*.h
 %{_libdir}/pkgconfig/*.pc
+%if !%{with crosscompile}
 %{_mandir}/man3/*
+%endif
 
-%ifnarch %mips %arm
+%ifnarch %mips %arm aarch64
 %files -n %{libname}-java
 %{_datadir}/java/*.jar
 %endif
 
-%ifnarch %mips %arm
+%ifnarch %mips %arm aarch64
 %files -n %{libname}-mono
 %{_libdir}/*.dll
 %endif
