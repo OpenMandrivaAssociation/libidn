@@ -97,7 +97,7 @@ mv iconv.tmp doc/libidn.info
 autoreconf -fi
 
 %configure2_5x \
-%ifnarch %mips %arm
+%ifnarch %mips %arm aarch64
 	--enable-java \
 	--enable-valgrind-tests \
 %endif
