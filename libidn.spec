@@ -90,7 +90,10 @@ Mono support for the %{name}.
 
 %prep
 %setup -q
-%apply_patches
+%patch0 -p1
+%if %{with crosscompile}
+%patch1 -p1
+%endif
 
 # Name directory sections consistently in the info file, rhbz #209491
 sed -i '/^INFO-DIR-SECTION/{s/GNU Libraries/Libraries/;s/GNU utilities/Utilities/;}' doc/libidn.info
