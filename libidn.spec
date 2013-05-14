@@ -14,9 +14,7 @@ URL:		http://www.gnu.org/software/libidn/
 Source0:	http://ftp.gnu.org/gnu/libidn/%{name}-%{version}.tar.gz
 Source1:	http://ftp.gnu.org/gnu/libidn/%{name}-%{version}.tar.gz.sig
 Patch0:		libidn-1.25-automake-1.12.patch
-%if %{with crosscompile}
 Patch1000:	002-disable-po-docs-examples.patch
-%endif
 
 BuildRequires:	gtk-doc
 BuildRequires:	intltool
@@ -92,7 +90,7 @@ Mono support for the %{name}.
 %setup -q
 %patch0 -p1
 %if %{with crosscompile}
-%patch1 -p1
+%patch1000 -p1
 %endif
 
 # Name directory sections consistently in the info file, rhbz #209491
