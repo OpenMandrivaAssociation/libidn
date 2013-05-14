@@ -101,9 +101,11 @@ sed -i '/^INFO-DIR-SECTION/{s/GNU Libraries/Libraries/;s/GNU utilities/Utilities
 iconv -f ISO-8859-1 -t UTF-8 doc/libidn.info > iconv.tmp
 mv iconv.tmp doc/libidn.info
 
-%build
-autoreconf -fi
+aclocal -I m4 -I gl/m4 -I lib/gl/m4 --dont-fix
+automake -a
+autoconf
 
+%build
 %configure2_5x \
 %ifnarch %mips %arm aarch64
 	--enable-java \
