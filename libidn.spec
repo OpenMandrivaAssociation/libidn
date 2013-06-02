@@ -1,6 +1,6 @@
 %bcond_with crosscompile
 
-%define	major 11
+%define	major	11
 %define libname	%mklibname idn %{major}
 %define devname %mklibname idn -d
 
@@ -10,7 +10,7 @@ Version:	1.26
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
-URL:		http://www.gnu.org/software/libidn/
+Url:		http://www.gnu.org/software/libidn/
 Source0:	http://ftp.gnu.org/gnu/libidn/%{name}-%{version}.tar.gz
 Source1:	http://ftp.gnu.org/gnu/libidn/%{name}-%{version}.tar.gz.sig
 Patch0:		libidn-1.25-automake-1.12.patch
@@ -112,7 +112,6 @@ autoconf
 %ifnarch %mips %arm aarch64
 	--enable-csharp=mono \
 %endif
-	--disable-rpath \
 	--disable-static
 
 %make
