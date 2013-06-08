@@ -1,4 +1,5 @@
 %bcond_with crosscompile
+%bcond_with java
 
 %define	major	11
 %define libname	%mklibname idn %{major}
@@ -22,14 +23,11 @@ BuildRequires:	libtool
 BuildRequires:	m4
 BuildRequires:	texinfo
 BuildRequires:	gettext-devel
-%ifnarch %mips %arm
+%if %{with java}
 BuildRequires:	valgrind
 BuildRequires:	java-rpmbuild
 %endif
-# disable on arm for now. test it again on real hardware. qemu doesn't like it
-%ifnarch %mips %arm
 BuildRequires:	mono
-%endif
 
 %description
 GNU Libidn is an implementation of the Stringprep, Punycode and
@@ -105,13 +103,11 @@ autoconf
 
 %build
 %configure2_5x \
-%ifnarch %mips %arm aarch64
+%if %{with java}
 	--enable-java \
 	--enable-valgrind-tests \
 %endif
-%ifnarch %mips %arm aarch64
 	--enable-csharp=mono \
-%endif
 	--disable-static
 
 %make
@@ -168,13 +164,10 @@ mv %{buildroot}%{_infodir}/%{name}.info %{buildroot}%{_infodir}/%{libname}.info
 %{_mandir}/man3/*
 %endif
 
-%ifnarch %mips %arm aarch64
+%if %{with java}
 %files -n %{libname}-java
 %{_datadir}/java/*.jar
 %endif
 
-%ifnarch %mips %arm aarch64
 %files -n %{libname}-mono
 %{_libdir}/*.dll
-%endif
-
