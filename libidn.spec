@@ -91,6 +91,9 @@ Mono support for the %{name}.
 %patch1000 -p1
 %endif
 
+# bundled, with wrong bytecode
+find . -name java/*.jar -delete
+
 # Name directory sections consistently in the info file, rhbz #209491
 sed -i '/^INFO-DIR-SECTION/{s/GNU Libraries/Libraries/;s/GNU utilities/Utilities/;}' doc/libidn.info
 
@@ -108,6 +111,8 @@ autoconf
 	--enable-valgrind-tests \
 %endif
 	--enable-csharp=mono \
+	--with-packager="OpenMandriva" \
+	--with-packager-bug-reports="http://issues.openmandriva.org" \
 	--disable-static
 
 %make
