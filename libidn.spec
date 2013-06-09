@@ -8,7 +8,7 @@
 Summary:	Internationalized string processing library
 Name:		libidn
 Version:	1.27
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnu.org/software/libidn/
@@ -64,7 +64,7 @@ Group:		System/Servers
 This package provides the commandline interface to the
 %{libname} library.
 
-%ifnarch %mips %arm
+%if %{with java}
 %package -n %{libname}-java
 Summary:	Java support for the %{name}
 Group:		Development/Java
@@ -73,6 +73,7 @@ Requires:	%{libname} >= %{version}-%{release}
 
 %description -n %{libname}-java
 Java support for the %{name}.
+%endif
 
 %package -n %{libname}-mono
 Summary:	Mono support for the %{name}
@@ -82,7 +83,6 @@ Requires:	%{libname} >= %{version}-%{release}
 
 %description -n %{libname}-mono
 Mono support for the %{name}.
-%endif
 
 %prep
 %setup -q
