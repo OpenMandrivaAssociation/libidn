@@ -27,7 +27,10 @@ BuildRequires:	gettext-devel
 BuildRequires:	valgrind
 BuildRequires:	java-rpmbuild
 %endif
+# disable on arm for now. test it again on real hardware. qemu doesn't like it
+%ifnarch %mips %arm aarch64
 BuildRequires:	mono
+%endif
 
 %description
 GNU Libidn is an implementation of the Stringprep, Punycode and
@@ -75,6 +78,7 @@ Requires:	%{libname} >= %{version}-%{release}
 Java support for the %{name}.
 %endif
 
+%ifnarch %mips %arm aarch64
 %package -n %{libname}-mono
 Summary:	Mono support for the %{name}
 Group:		Development/Other
@@ -83,6 +87,7 @@ Requires:	%{libname} >= %{version}-%{release}
 
 %description -n %{libname}-mono
 Mono support for the %{name}.
+%endif
 
 %prep
 %setup -q
@@ -110,7 +115,9 @@ autoconf
 	--enable-java \
 	--enable-valgrind-tests \
 %endif
+%ifnarch %arm %mips aarch64
 	--enable-csharp=mono \
+%endif
 	--with-packager="OpenMandriva" \
 	--with-packager-bug-reports="http://issues.openmandriva.org" \
 	--disable-static
@@ -174,5 +181,7 @@ mv %{buildroot}%{_infodir}/%{name}.info %{buildroot}%{_infodir}/%{libname}.info
 %{_datadir}/java/*.jar
 %endif
 
+%ifnarch %mips %arm aarch64
 %files -n %{libname}-mono
 %{_libdir}/*.dll
+%endif
