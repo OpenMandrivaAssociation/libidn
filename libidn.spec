@@ -158,7 +158,7 @@ mv %{buildroot}%{_infodir}/%{name}.info %{buildroot}%{_infodir}/%{libname}.info
 %files -n idn -f %{name}.lang
 %doc ChangeLog FAQ README THANKS contrib
 %{_bindir}/idn
-%{_datadir}/emacs/site-lisp/*.el
+%{_datadir}/*emacs/site-lisp/*.el
 %if !%{with crosscompile}
 %{_infodir}/%{libname}.info*
 %{_mandir}/man1/idn.1*
