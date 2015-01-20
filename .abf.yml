@@ -1,6 +1,2 @@
-removed_sources:
-  libidn-1.26.tar.gz: b1cb40646a96dadbfc41d060d23dfb382eec1128
 sources:
-  libidn-1.26.tar.gz.sig: 8bb32b2482f3419384f0af5d1d437617a383e466
-  libidn-1.27.tar.gz: 67364d0cc331f2ea93f09a1b436dc606db16ad4d
-  libidn-1.27.tar.gz.sig: feda03b9248b730ac0a17d9c3864be3210d82e8b
+  libidn-1.29.tar.gz: e0959eec9a03fd8053379b0aeab447c546c05ab2

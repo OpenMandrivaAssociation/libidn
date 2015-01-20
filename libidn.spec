@@ -1,19 +1,18 @@
 %bcond_with crosscompile
 %bcond_with java
 
-%define	major	11
-%define libname	%mklibname idn %{major}
+%define	major 11
+%define libname %mklibname idn %{major}
 %define devname %mklibname idn -d
 
 Summary:	Internationalized string processing library
 Name:		libidn
-Version:	1.27
-Release:	9
+Version:	1.29
+Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnu.org/software/libidn/
 Source0:	http://ftp.gnu.org/gnu/libidn/%{name}-%{version}.tar.gz
-Source1:	http://ftp.gnu.org/gnu/libidn/%{name}-%{version}.tar.gz.sig
 Patch0:		libidn-1.25-automake-1.12.patch
 Patch1000:	002-disable-po-docs-examples.patch
 
@@ -110,7 +109,7 @@ automake -a
 autoconf
 
 %build
-%configure2_5x \
+%configure \
 %if %{with java}
 	--enable-java \
 	--enable-valgrind-tests \
