@@ -13,7 +13,6 @@ License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnu.org/software/libidn/
 Source0:	http://ftp.gnu.org/gnu/libidn/%{name}-%{version}.tar.gz
-Patch0:		libidn-1.25-automake-1.12.patch
 Patch1000:	002-disable-po-docs-examples.patch
 
 BuildRequires:	gtk-doc
@@ -90,7 +89,6 @@ Mono support for the %{name}.
 
 %prep
 %setup -q
-%patch0 -p1
 %if %{with crosscompile}
 %patch1000 -p1
 %endif
