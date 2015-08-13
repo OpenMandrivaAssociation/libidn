@@ -107,6 +107,8 @@ automake -a
 autoconf
 
 %build
+%define _disable_rebuild_configure 1
+
 %configure \
 %if %{with java}
 	--enable-java \
