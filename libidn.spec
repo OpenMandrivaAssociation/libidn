@@ -7,8 +7,8 @@
 
 Summary:	Internationalized string processing library
 Name:		libidn
-Version:	1.31
-Release:	2
+Version:	1.32
+Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnu.org/software/libidn/
