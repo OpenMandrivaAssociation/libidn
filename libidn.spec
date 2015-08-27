@@ -8,7 +8,7 @@
 Summary:	Internationalized string processing library
 Name:		libidn
 Version:	1.32
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnu.org/software/libidn/
@@ -76,7 +76,7 @@ Requires:	%{libname} >= %{version}-%{release}
 Java support for the %{name}.
 %endif
 
-%ifnarch %mips %arm aarch64
+%ifnarch %mips %arm aarch64 %{ix86}
 %package -n %{libname}-mono
 Summary:	Mono support for the %{name}
 Group:		Development/Other
@@ -114,7 +114,7 @@ autoconf
 	--enable-java \
 	--enable-valgrind-tests \
 %endif
-%ifnarch %arm %mips aarch64
+%ifnarch %mips %arm aarch64 %{ix86}
 	--enable-csharp=mono \
 %endif
 	--with-packager="OpenMandriva" \
@@ -180,7 +180,7 @@ mv %{buildroot}%{_infodir}/%{name}.info %{buildroot}%{_infodir}/%{libname}.info
 %{_datadir}/java/*.jar
 %endif
 
-%ifnarch %mips %arm aarch64
+%ifnarch %mips %arm aarch64 %{ix86}
 %files -n %{libname}-mono
 %{_libdir}/*.dll
 %endif
