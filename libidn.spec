@@ -1,14 +1,14 @@
 %bcond_with crosscompile
 %bcond_with java
 
-%define	major 11
+%define major 11
 %define libname %mklibname idn %{major}
 %define devname %mklibname idn -d
 
 Summary:	Internationalized string processing library
 Name:		libidn
 Version:	1.33
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnu.org/software/libidn/
@@ -21,6 +21,7 @@ BuildRequires:	libtool
 BuildRequires:	m4
 BuildRequires:	texinfo
 BuildRequires:	gettext-devel
+BuildRequires:	help2man
 %if %{with java}
 BuildRequires:	valgrind
 BuildRequires:	java-rpmbuild
@@ -40,7 +41,7 @@ names.
 Summary:	Internationalized string processing library
 Group:		System/Libraries
 
-%description -n	%{libname}
+%description -n %{libname}
 GNU Libidn is an implementation of the Stringprep, Punycode and
 IDNA specifications defined by the IETF Internationalized Domain
 Names (IDN) working group, used for internationalized domain
@@ -54,7 +55,7 @@ Provides:	idn-devel = %{version}-%{release}
 Requires:	%{libname} >= %{version}-%{release}
 Obsoletes:	%{mklibname idn 11 -d} < 1.25
 
-%description -n	%{devname}
+%description -n %{devname}
 Development files for the %{libname} library.
 
 %package -n idn
