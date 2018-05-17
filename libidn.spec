@@ -1,7 +1,7 @@
 %bcond_with crosscompile
 %bcond_with java
 
-%define major 11
+%define major 12
 %define libname %mklibname idn %{major}
 %define devname %mklibname idn -d
 
@@ -22,6 +22,7 @@ BuildRequires:	m4
 BuildRequires:	texinfo
 BuildRequires:	gettext-devel
 BuildRequires:	help2man
+BuildRequires:	autoconf-archive
 %if %{with java}
 BuildRequires:	valgrind
 BuildRequires:	java-rpmbuild
