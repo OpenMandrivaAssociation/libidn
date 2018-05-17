@@ -7,7 +7,7 @@
 
 Summary:	Internationalized string processing library
 Name:		libidn
-Version:	1.34
+Version:	1.35
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
@@ -122,10 +122,10 @@ autoconf
 	--with-packager-bug-reports="http://issues.openmandriva.org" \
 	--disable-static
 
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 # fix "invalid-lc-messages-dir":
 rm -rf %{buildroot}%{_datadir}/locale/en@*quot
