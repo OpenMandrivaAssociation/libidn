@@ -143,7 +143,6 @@ find doc -type f | sed 's/^/%{doc} /' | \
     grep -v "gdoc" | \
     grep -v "mdate-sh" > %{libname}-devel.filelist
 
-find examples -type f -name ".c" | sed 's/^/%{doc} /' >> %{devname}.filelist
 
 %find_lang %{name}
 
@@ -168,7 +167,7 @@ mv %{buildroot}%{_infodir}/%{name}.info %{buildroot}%{_infodir}/%{libname}.info
 %files -n %{libname}
 %{_libdir}/libidn.so.%{major}*
 
-%files -n %{devname} -f %{devname}.filelist
+%files -n %{devname}
 %doc doc/libidn.html TODO libc/example.c examples/README examples/Makefile.*
 %{_libdir}/libidn.so
 %{_includedir}/*.h
