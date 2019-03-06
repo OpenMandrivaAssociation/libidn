@@ -181,7 +181,7 @@ mv %{buildroot}%{_infodir}/%{name}.info %{buildroot}%{_infodir}/%{libname}.info
 %{_datadir}/java/*.jar
 %endif
 
-%ifnarch %mips %arm aarch64 %{ix86}
+%ifnarch %mips %arm aarch64 %{ix86} riscv64
 %files -n %{libname}-mono
 %{_libdir}/*.dll
 %endif
