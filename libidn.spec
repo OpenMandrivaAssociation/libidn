@@ -28,7 +28,7 @@ BuildRequires:	valgrind
 BuildRequires:	java-rpmbuild
 %endif
 # disable on arm for now. test it again on real hardware. qemu doesn't like it
-%ifnarch %mips %arm aarch64 %{ix86}
+%ifnarch %mips %arm aarch64 %{ix86} riscv64
 BuildRequires:	mono
 %endif
 
