@@ -9,7 +9,7 @@
 
 Summary:	Internationalized string processing library
 Name:		libidn
-Version:	1.36
+Version:	1.37
 Release:	2
 License:	LGPLv2+
 Group:		System/Libraries
@@ -170,7 +170,7 @@ mv %{buildroot}%{_infodir}/%{name}.info %{buildroot}%{_infodir}/%{libname}.info
 %{_libdir}/libidn.so.%{major}*
 
 %files -n %{devname}
-%doc doc/libidn.html TODO libc/example.c examples/README examples/Makefile.*
+%doc libc/example.c examples/README examples/Makefile.*
 %{_libdir}/libidn.so
 %{_includedir}/*.h
 %{_libdir}/pkgconfig/*.pc
