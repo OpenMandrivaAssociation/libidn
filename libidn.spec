@@ -10,7 +10,7 @@
 Summary:	Internationalized string processing library
 Name:		libidn
 Version:	1.37
-Release:	2
+Release:	3
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnu.org/software/libidn/
@@ -30,7 +30,7 @@ BuildRequires:	valgrind
 BuildRequires:	java-rpmbuild
 %endif
 # disable on arm for now. test it again on real hardware. qemu doesn't like it
-%ifnarch %mips %arm aarch64 %{ix86} riscv64
+%ifnarch %mips %{armx} %{ix86} riscv64
 BuildRequires:	mono
 %endif
 
@@ -80,7 +80,7 @@ Requires:	%{libname} >= %{version}-%{release}
 Java support for the %{name}.
 %endif
 
-%ifnarch %mips %arm aarch64 %{ix86}
+%ifnarch %mips %armx %{ix86}
 %package -n %{libname}-mono
 Summary:	Mono support for the %{name}
 Group:		Development/Other
@@ -92,7 +92,7 @@ Mono support for the %{name}.
 %endif
 
 %prep
-%setup -q
+%autosetup -p1
 %if %{with crosscompile}
 %patch1000 -p1
 %endif
@@ -118,11 +118,11 @@ autoconf
 	--enable-java \
 	--enable-valgrind-tests \
 %endif
-%ifnarch %mips %arm aarch64 %{ix86}
+%ifnarch %mips %{armx} %{ix86}
 	--enable-csharp=mono \
 %endif
 	--with-packager="OpenMandriva" \
-	--with-packager-bug-reports="http://issues.openmandriva.org" \
+	--with-packager-bug-reports="%{bugurl}" \
 	--disable-static
 
 %make_build
@@ -145,11 +145,9 @@ find doc -type f | sed 's/^/%{doc} /' | \
     grep -v "gdoc" | \
     grep -v "mdate-sh" > %{libname}-devel.filelist
 
-
 %find_lang %{name}
 
 #(tpg) really not needed... also got lzma'd :)
-
 rm -rf %{buildroot}%{_infodir}/*.png*
 
 %if !%{with crosscompile}
