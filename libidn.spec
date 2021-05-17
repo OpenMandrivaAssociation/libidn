@@ -15,8 +15,9 @@ License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnu.org/software/libidn/
 Source0:	http://ftp.gnu.org/gnu/libidn/%{name}-%{version}.tar.gz
+%if %{with crosscompile}
 Patch1000:	002-disable-po-docs-examples.patch
-
+%endif
 BuildRequires:	gtk-doc
 BuildRequires:	intltool
 BuildRequires:	libtool
@@ -78,9 +79,6 @@ Java support for the %{name}.
 
 %prep
 %autosetup -p1
-%if %{with crosscompile}
-%patch1000 -p1
-%endif
 
 # bundled, with wrong bytecode
 find . -name java/*.jar -delete
