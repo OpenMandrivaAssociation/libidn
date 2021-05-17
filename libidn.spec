@@ -29,10 +29,6 @@ BuildRequires:	autoconf-archive
 BuildRequires:	valgrind
 BuildRequires:	java-rpmbuild
 %endif
-# disable on arm for now. test it again on real hardware. qemu doesn't like it
-%ifnarch %mips %{armx} %{ix86} riscv64
-BuildRequires:	mono
-%endif
 
 %description
 GNU Libidn is an implementation of the Stringprep, Punycode and
@@ -80,17 +76,6 @@ Requires:	%{libname} >= %{version}-%{release}
 Java support for the %{name}.
 %endif
 
-%ifnarch %mips %armx %{ix86}
-%package -n %{libname}-mono
-Summary:	Mono support for the %{name}
-Group:		Development/Other
-Provides:	%{name}-mono = %{version}-%{release}
-Requires:	%{libname} >= %{version}-%{release}
-
-%description -n %{libname}-mono
-Mono support for the %{name}.
-%endif
-
 %prep
 %autosetup -p1
 %if %{with crosscompile}
@@ -118,9 +103,7 @@ autoconf
 	--enable-java \
 	--enable-valgrind-tests \
 %endif
-%ifnarch %mips %{armx} %{ix86}
-	--enable-csharp=mono \
-%endif
+	--disable-csharp \
 	--with-packager="OpenMandriva" \
 	--with-packager-bug-reports="%{bugurl}" \
 	--disable-static
@@ -179,9 +162,4 @@ mv %{buildroot}%{_infodir}/%{name}.info %{buildroot}%{_infodir}/%{libname}.info
 %if %{with java}
 %files -n %{libname}-java
 %{_datadir}/java/*.jar
-%endif
-
-%ifnarch %mips %arm aarch64 %{ix86} riscv64
-%files -n %{libname}-mono
-%{_libdir}/*.dll
 %endif
