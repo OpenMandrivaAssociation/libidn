@@ -27,6 +27,7 @@ BuildRequires:	texinfo
 BuildRequires:	gettext-devel
 BuildRequires:	help2man
 BuildRequires:	autoconf-archive
+BuildRequires:	locales-extra-charsets
 %if %{with java}
 BuildRequires:	valgrind
 BuildRequires:	java-rpmbuild
