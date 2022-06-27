@@ -2,19 +2,20 @@
 %bcond_with java
 
 %define major 12
-%define libname %mklibname idn %{major}
+%define libname %mklibname idn
 %define devname %mklibname idn -d
 
 %global optflags %{optflags} -O3
 
 Summary:	Internationalized string processing library
 Name:		libidn
-Version:	1.38
+Version:	1.41
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnu.org/software/libidn/
 Source0:	http://ftp.gnu.org/gnu/libidn/%{name}-%{version}.tar.gz
+Patch0:		libidn-gnulib-clang.patch
 %if %{with crosscompile}
 Patch1000:	002-disable-po-docs-examples.patch
 %endif
@@ -40,6 +41,7 @@ names.
 %package -n %{libname}
 Summary:	Internationalized string processing library
 Group:		System/Libraries
+%rename %{mklibname idl 12}
 
 %description -n %{libname}
 GNU Libidn is an implementation of the Stringprep, Punycode and
