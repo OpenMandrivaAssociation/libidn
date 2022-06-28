@@ -42,7 +42,7 @@ names.
 %package -n %{libname}
 Summary:	Internationalized string processing library
 Group:		System/Libraries
-%rename %{mklibname idl 12}
+%rename %{mklibname idn 12}
 
 %description -n %{libname}
 GNU Libidn is an implementation of the Stringprep, Punycode and
