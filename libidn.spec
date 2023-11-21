@@ -6,11 +6,12 @@
 %define devname %mklibname idn -d
 
 %global optflags %{optflags} -O3
+%global build_ldflags %{build_ldflags} -Wl,--undefined-version
 
 Summary:	Internationalized string processing library
 Name:		libidn
 Version:	1.41
-Release:	2
+Release:	3
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnu.org/software/libidn/
