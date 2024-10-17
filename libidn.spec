@@ -14,7 +14,7 @@ Version:	1.41
 Release:	3
 License:	LGPLv2+
 Group:		System/Libraries
-Url:		http://www.gnu.org/software/libidn/
+Url:		https://www.gnu.org/software/libidn/
 Source0:	http://ftp.gnu.org/gnu/libidn/%{name}-%{version}.tar.gz
 Patch0:		libidn-gnulib-clang.patch
 %if %{with crosscompile}
