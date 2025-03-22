@@ -10,13 +10,12 @@
 
 Summary:	Internationalized string processing library
 Name:		libidn
-Version:	1.41
-Release:	3
+Version:	1.43
+Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		https://www.gnu.org/software/libidn/
 Source0:	http://ftp.gnu.org/gnu/libidn/%{name}-%{version}.tar.gz
-Patch0:		libidn-gnulib-clang.patch
 %if %{with crosscompile}
 Patch1000:	002-disable-po-docs-examples.patch
 %endif
