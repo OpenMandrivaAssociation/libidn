@@ -19,6 +19,10 @@ Source0:	http://ftp.gnu.org/gnu/libidn/%{name}-%{version}.tar.gz
 %if %{with crosscompile}
 Patch1000:	002-disable-po-docs-examples.patch
 %endif
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	gtk-doc
 BuildRequires:	intltool
 BuildRequires:	libtool
